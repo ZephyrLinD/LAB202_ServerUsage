@@ -1,21 +1,13 @@
 # 在一切之前...
 **需要使用服务器的同学请通过微信私信你们的账号和密码，默认是没有的。**
 
-**omnisky用户的账号密码我会发布在群中。**
+**管理员用户的账号密码我会发布在群中。**
 
 # 基本使用
--   服务器内网使用IP: 192.168.1.43      &emsp;&emsp;&emsp;端口: 22 <br>
+-   统一使用SSH协议登录，使用FRP进行地址映射，[这里是FRP的GitHub页面](https://github.com/fatedier/frp)。<br>
 
-    公网IP: 123.206.59.126             &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;端口: 6000<br>
+    所以每次开关机需要重新启动 FRP。所以大家开关机前**请联系我**。
     
-    统一使用SSH协议登录，使用FRP进行地址映射，[这里是FRP的GitHub页面](https://github.com/fatedier/frp)。<br>
-
-    所以每次开关机需要重新启动 FRP。操作如下：
-    ```
-    登陆omnisky账号
- 
-    cd /home/omnisky && screen ./startFRP.sh
-    ```
 -  当前目录切换：`cd 目录名`
 
    查看 GPU 利用情况：`nvidia-smi`
@@ -36,23 +28,23 @@
 
    请大家尽量将所需要的数据集、代码拷贝至此软连接文件夹中，固态硬盘空间有限，还请大家支持！
 
--  如果需要安装软件可以登录 `omnisky` 用户安装，或者联系服务器维护的同学。
+-  如果需要安装软件可以登录管理员用户安装，或者联系服务器维护的同学。
 
 # Python & Anaconda 指令
--  使用GPU进行运算：
+-  使用GPU进行运算，请添加这些到源代码中：
     ```
     import os
     os.environ['CUDA_VISIBLE_DEVICES'] = ‘0’
     ```
 
--  动态分配显存：（这个在程序之中必须加上）
+-  动态分配显存，请添加这些到源代码中：**（这个在程序之中必须加上）**
     ```
     config = tensorflow.ConfigProto()
     config.gpu_options.allow_growth = True
     session = tensorflow.Session(config=config)
     ```
 
--  Anadonda 虚拟环境
+-  Anadonda 虚拟环境，在命令行下执行
     ```
     conda create --name 环境名 python=需要的python 版本          # 创建环境
     source activate 环境名                                      # 激活环境
@@ -62,7 +54,7 @@
 
     请在虚拟环境中配置实验需要的组件、资源版本，具体的大家可以上网参考。
 
-    例如我的实验环境配置（仅供参考）:
+    例如我的实验环境配置**（仅供参考）**:
     ```
     conda create –-name myEnvironment python=3.6
 
