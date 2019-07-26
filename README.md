@@ -78,3 +78,88 @@
     echo 'export PATH="/opt/anaconda3/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
     ```
     复制此行代码粘贴到终端执行即可。
+
+# Tmux
+
+鉴于实验室网络环境很差，大家在家对实验室在改代码、跑实验的时候网络总是断网。当SSH会话中断的时候，一切会话都会强制中断。
+
+很烦....
+
+所以我建议大家在跑实验的时候使用TMUX。
+
+## 什么是TMUX
+
+TMUX（terminal multiplexer）是Linux上的终端复用神器，可从一个屏幕上管理多个终端（准确说是伪终端）。使用该工具，用户可以连接或断开会话，而保持终端在后台运行。类似的工具还有screen，个人对这二者的使用感受是，用过tmux就再也不想用screen了。
+
+### 基本命令
+
+```Shell
+tmux new
+# 创建默认名称的会话（在tmux命令模式使用new命令可实现同样的功能，其他命令同理，后文不再列出tmux终端命令）
+
+tmux new -s mysession　　
+# 创建名为mysession的会话
+
+tmux ls　　
+# 显示会话列表
+
+tmux a　　
+# 连接上一个会话
+
+tmux a -t mysession　　
+# 连接指定会话
+
+tmux rename -t s1 s2　　
+# 重命名会话s1为s2
+
+tmux kill-session　　
+# 关闭上次打开的会话
+
+tmux kill-session -t s1　　
+# 关闭会话s1
+
+tmux kill-session -a -t s1　　
+# 关闭除s1外的所有会话
+
+tmux kill-server　　
+# 关闭所有会话
+```
+
+## 其中常用快捷键
+
+一般使用命令和快捷键进行操作，可在系统shell终端和tmux命令模式（类似vim的命令模式）下使用命令，或者在tmux终端使用快捷键。
+
+tmux默认的快捷键前缀是Ctrl+b(下文用 `prefix` 指代)，按下前缀组合键后松开，再按下命令键进行快捷操作
+
+另外，TMUX有窗口和窗格的概念，示意图如下
+
+![本图来自网络](images/1.png "本图来自网络")
+
+常用快捷键 **(我只列出了比较重要的如果大家有别的需要可以上网搜索一下)**：
+
+```shell
+
+prefix %　　                    # 水平方向创建窗格
+
+prefix "　　                    # 垂直方向创建窗格
+
+prefix Up|Down|Left|Right　　   # 根据箭头方向切换窗格
+
+prefix &　　                    # 关闭当前窗口
+
+prefix D                        # 把窗口放在后台
+
+prefix c　　                    # 创建一个新窗口
+
+prefix ,　　                    # 重命名当前窗口
+
+prefix w　　                    # 列出所有窗口，可进行切换
+
+prefix n　　                    # 进入下一个窗口
+
+prefix p　　                    # 进入上一个窗口
+
+prefix 0~9　　                  # 选择编号0~9对应的窗口
+
+prefix '　　                    # 切换至指定编号（可大于9）的窗口
+```
